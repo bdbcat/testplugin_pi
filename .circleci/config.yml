@@ -194,7 +194,7 @@ jobs:
                       - /Users/distiller/project/cache
             - run: >
                   sh -c "otool -L build-osx/*.dylib"
-            - run: cd build-osx; /bin/bash < upload.sh
+            - deploy-code
 
     build-msvc-wx32-2022:
         executor:
