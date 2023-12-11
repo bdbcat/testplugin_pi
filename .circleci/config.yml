@@ -183,19 +183,18 @@ jobs:
             - restore_cache:
                   key: "{{checksum \"build-deps/macos-cache-stamp\"}}\
               -{{checksum \"cmake/MacosWxwidgets.cmake\"}}\
-              -{{checksum \"ci/circleci-build-macos.sh\"}}"
+              -{{checksum \"ci/circleci-build-macos-universal.sh\"}}"
             - run: ci/circleci-build-macos-universal.sh
             - save_cache:
                   key: "{{checksum \"build-deps/macos-cache-stamp\"}}\
               -{{checksum \"cmake/MacosWxwidgets.cmake\"}}\
-              -{{checksum \"ci/circleci-build-macos.sh\"}}"
+              -{{checksum \"ci/circleci-build-macos-universal.sh\"}}"
                   paths:
                       - /tmp/local.cache.tar
                       - /Users/distiller/project/cache
             - run: >
-                  sh -c "otool -L build-osx/app/*/OpenCPN.app/Contents/PlugIns/*.dylib"
+                  sh -c "otool -L build-osx/*.dylib"
             - run: cd build-osx; /bin/bash < upload.sh
-            - run: ci/git-push.sh  build-osx
 
     build-msvc-wx32-2022:
         executor:
