@@ -181,6 +181,11 @@ else()
     endif(MINGW)
 endif()
 
+if (APPLE)
+    message(STATUS "${CMLOC}CMAKE_OSX_ARCHITECTURES: ${CMAKE_OSX_ARCHITECTURES}")
+    set(PKG_TARGET_ARCH "-x86_64;arm64")
+endif (APPLE)
+
 message(STATUS "${CMLOC}ARCH: ${ARCH}")
 
 if("${PKG_BUILD_TARGET}" STREQUAL "")
