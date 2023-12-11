@@ -193,7 +193,7 @@ jobs:
                       - /tmp/local.cache.tar
                       - /Users/distiller/project/cache
             - run: >
-                  sh -c "otool -L build-osx/*.dylib"
+                  sh -c "otool -L build/*.dylib"
             - deploy-code
 
     build-msvc-wx32-2022:

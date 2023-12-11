@@ -25,10 +25,10 @@ if [[ -n "$CI" && -f /tmp/local.cache.tar ]]; then
 fi
 
 # Set up build directory
-rm -rf build-osx  && mkdir build-osx
+rm -rf build  && mkdir build
 
 # Create a log file.
-exec > >(tee build-osx/build.log) 2>&1
+exec > >(tee build/build.log) 2>&1
 
 export MACOSX_DEPLOYMENT_TARGET=10.10
 
@@ -54,7 +54,7 @@ sudo tar -C /usr/local -xJf /tmp/macos_deps_universal.tar.xz
 export OPENSSL_ROOT_DIR='/usr/local'
 
 # Build and package
-cd build-osx
+cd build
 cmake \
   "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE:-Release}" \
   -DCMAKE_INSTALL_PREFIX= \
@@ -65,7 +65,7 @@ cmake \
 
 if [[ -z "$CI" ]]; then
     echo '$CI not found in environment, assuming local setup'
-    echo "Complete build using 'cd build-osx; make tarball' or so."
+    echo "Complete build using 'cd build; make tarball' or so."
     exit 0
 fi
 
