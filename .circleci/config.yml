@@ -177,7 +177,6 @@ jobs:
         environment:
             - OCPN_TARGET: macos
             - CMAKE_BUILD_PARALLEL_LEVEL: 2
-            - DEPLOY_USE_ORB: true
             - WX_VER: 32
         steps:
             - checkout
@@ -196,7 +195,8 @@ jobs:
                       - /Users/distiller/project/cache
             - run: >
                   sh -c "otool -L build/*.dylib"
-            - deploy-code
+            - deploy-code:
+                install-python: true
 
     build-msvc-wx32-2022:
         executor:
