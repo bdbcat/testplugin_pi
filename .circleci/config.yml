@@ -195,6 +195,8 @@ jobs:
                       - /Users/distiller/project/cache
             - run: >
                   sh -c "otool -L build/*.dylib"
+            - run: >
+                  sh -c "cat build/*.xml"
             - deploy-code
 
     build-msvc-wx32-2022:
