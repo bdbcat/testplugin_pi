@@ -258,20 +258,16 @@ else(NOT WIN32 AND NOT QT_ANDROID)
     endif(_wx_selected_config MATCHES "androideabi-qt-armhf")
 endif(NOT WIN32 AND NOT QT_ANDROID)
 
-set( arch_no_dash "${ARCH}")
-if(APPLE AND CMAKE_OSX_ARCHITECTURES)
-    set(arch_no_dash "arm64-x86_64")
-endif()
 
 if(APPLE AND CMAKE_OSX_ARCHITECTURES)
     string(REPLACE ";" "-" _compound_arch "${CMAKE_OSX_ARCHITECTURES}")
-    set(arch_no_dash "${_compound_arch}")
+    set(COMPOUND_ARCH_DASH "${_compound_arch}")
 else()
-    set(arch_no_dash "${ARCH}")
+    set(COMPOUND_ARCH_DASH "${ARCH}")
 endif()
 
 message(STATUS "${CMLOC}ARCH: ${ARCH}")
-message(STATUS "${CMLOC}arch_no_dash: ${arch_no_dash}")
+message(STATUS "${CMLOC}COMPOUND_ARCH_DASH: ${COMPOUND_ARCH_DASH}")
 
 if(NOT "${PKG_TARGET}" STREQUAL "")
     string(STRIP ${PKG_TARGET} PKG_TARGET)
