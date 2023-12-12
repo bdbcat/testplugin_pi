@@ -263,7 +263,15 @@ if(APPLE AND CMAKE_OSX_ARCHITECTURES)
     set(arch_no_dash "arm64-x86_64")
 endif()
 
+if(APPLE AND CMAKE_OSX_ARCHITECTURES)
+    string(REPLACE ";" "-" _compound_arch "${CMAKE_OSX_ARCHITECTURES}")
+    set(arch_no_dash "${_compound_arch}")
+else()
+    set(arch_no_dash "${ARCH}")
+endif()
+
 message(STATUS "${CMLOC}ARCH: ${ARCH}")
+message(STATUS "${CMLOC}arch_no_dash: ${arch_no_dash}")
 
 if(NOT "${PKG_TARGET}" STREQUAL "")
     string(STRIP ${PKG_TARGET} PKG_TARGET)
