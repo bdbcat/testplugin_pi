@@ -40,17 +40,10 @@ pkg_version() { brew list --versions $2 $1 | tail -1 | awk '{print $2}'; }
 brew list --versions libexif || brew update-reset
 
 # Install packaged dependencies
-for pkg in cairo cmake gettext libarchive libexif python wget openssl@3; do
+for pkg in cmake gettext libarchive libexif python wget openssl@3; do
     brew list --versions $pkg || brew install $pkg || brew install $pkg || :
     brew link --overwrite $pkg || brew install $pkg
 done
-
-# Install packaged dependencies
-#here=$(cd "$(dirname "$0")"; pwd)
-#for pkg in $(sed '/#/d' < $here/../build-deps/macos-deps);  do
-#    brew list --versions $pkg || brew install $pkg || brew install $pkg || :
-#    brew link --overwrite $pkg || brew install $pkg
-#done
 
 #Install prebuilt dependencies
 wget -q https://dl.cloudsmith.io/public/nohal/opencpn-plugins/raw/files/macos_deps_universal.tar.xz \
