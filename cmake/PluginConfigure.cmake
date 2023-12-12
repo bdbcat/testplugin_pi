@@ -181,10 +181,10 @@ else()
     endif(MINGW)
 endif()
 
-if (APPLE)
-    message(STATUS "${CMLOC}CMAKE_OSX_ARCHITECTURES: ${CMAKE_OSX_ARCHITECTURES}")
-    set(PKG_TARGET_ARCH "-x86_64")
-endif (APPLE)
+#if (APPLE)
+#    message(STATUS "${CMLOC}CMAKE_OSX_ARCHITECTURES: ${CMAKE_OSX_ARCHITECTURES}")
+#    set(PKG_TARGET_ARCH "-x86_64")
+#endif (APPLE)
 
 message(STATUS "${CMLOC}ARCH: ${ARCH}")
 
