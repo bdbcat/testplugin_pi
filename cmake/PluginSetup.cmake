@@ -240,6 +240,10 @@ if(NOT WIN32 AND NOT QT_ANDROID)
         set(ARCH "x86_64")
     endif(APPLE)
 
+    if(APPLE AND CMAKE_OSX_ARCHITECTURES)
+        set(ARCH "arm64;x86_64")
+    endif()
+
 else(NOT WIN32 AND NOT QT_ANDROID)
     set(ARCH "x86_64")
     if(_wx_selected_config MATCHES "androideabi-qt-arm64")
