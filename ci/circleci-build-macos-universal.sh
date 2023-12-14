@@ -74,6 +74,7 @@ fi
 make
 make install
 make package
+make package
 
 # Create the cached /usr/local archive
 if [ -n "$CI"  ]; then
