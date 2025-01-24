@@ -83,17 +83,28 @@ sudo apt install python3-pip
 python3 -m pip install --user --force-reinstall -q pip setuptools
 sudo apt remove python3-six python3-colorama python3-urllib3
 export LC_ALL=C.UTF-8  LANG=C.UTF-8
-python3 -m pip install --user -q cmake
+python3 -m pip install --user -q cmake -vv
 
 last_ndk=$(ls -d /home/circleci/android-sdk/ndk/* | tail -1)
 test -d /opt/android || sudo mkdir -p /opt/android
 sudo ln -sf $last_ndk /opt/android/ndk
+
+if [ ! -z "$(BUILD_TYPE)" ]; then
+  tag=$(git tag --contains HEAD)
+  current_branch=$(git branch --show-current)
+  if [ -n "$tag" ] || [ "$current_branch" = "master" ]; then
+  BUILD_TYPE=Release
+  else
+  BUILD_TYPE=Debug
+  fi
+fi
 
 cmake -DCMAKE_TOOLCHAIN_FILE=cmake/android-armhf-toolchain.cmake \
   -D_wx_selected_config=androideabi-qt-armhf \
   -DwxQt_Build=build_android_release_19_static_O3 \
   -DQt_Build=build_arm32_19_O3/qtbase \
   -DOCPN_Android_Common=OCPNAndroidCommon-master \
+  -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
   ..
 
 make VERBOSE=1
